@@ -17,7 +17,7 @@ spring:
     password: root
   data:
     redis:
-      host: localhost
+      host: 192.168.50.3
       port: 6379
       password:
       timeout: 30000
@@ -33,11 +33,19 @@ spring:
 debug: true
 logging:
   level:
-    io.swagger.*: error
-    com.wcz0.asb: debug
-    org.springframework.boot.autoconfigure: ERROR
-  config: classpath:logback-spring.xml
-  file:
-      path: ./asb_log
+    com.wcz0.asb: info
+    org.springframework.boot: warn
+#  config: classpath:logback-spring.xml
+#  file:
+#      path: ./asb_log
 id-generator:
   worker-id: 1
+sa-token:
+  token-name: token
+  timeout: 2592000
+  active-timeout: -1
+  is-concurrent: true
+  is-share: true
+  token-style: uuid
+  is-log: true
+  jwt-secret-key: t768pv1t5qkisahnpxsgyknkbxljns46

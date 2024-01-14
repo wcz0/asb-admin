@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * @author wcz0
  */
-@EqualsAndHashCode(callSuper = true)
+//@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("admin_users")
 public class AdminUser extends Model<AdminUser> {

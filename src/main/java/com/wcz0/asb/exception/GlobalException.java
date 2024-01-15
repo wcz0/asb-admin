@@ -1,69 +1,75 @@
 package com.wcz0.asb.exception;
 
+import com.wcz0.asb.enums.ExceptionCodeEnum;
 import com.wcz0.asb.response.Result;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindException;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.Objects;
+import java.io.Serializable;
+
 
 /**
  * @author wcz0
  */
 @RestControllerAdvice
+@Slf4j
 public class GlobalException {
-    /**
-     * 拦截表单参数校验
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler({BindException.class})
-    public Result bindException(BindException e) {
-        BindingResult bindingResult = e.getBindingResult();
-        return Result.failed(ExceptionCodeEnum.VALIDATE_FAILED, Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
+
+    @ExceptionHandler(BaseException.class)
+    public Result<?> baseExceptionHandler(BaseException e) {
+        log.error("BaseException: " + e.getMessage(), e);
+        return Result.failed(e.getMessage());
     }
 
-    /**
-     * 拦截JSON参数校验
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Result bindException(MethodArgumentNotValidException e) {
-        BindingResult bindingResult = e.getBindingResult();
-        return Result.failed(ExceptionCodeEnum.VALIDATE_FAILED,Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage());
-    }
-
-    /**
-     * 拦截参数类型不正确
-     * @param e
-     * @return
-     */
-    @ResponseStatus(HttpStatus.OK)
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public Result bindException(HttpMediaTypeNotSupportedException e){
-        return Result.failed(ExceptionCodeEnum.PRAM_NOT_MATCH,Objects.requireNonNull(e.getMessage()));
-    }
-
-
-    //声明要捕获的异常
-    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(Exception.class)
-    @ResponseBody
-    public <T> Result<?> defaultExceptionHandler(Exception e) {
-        e.printStackTrace();
-        if(e instanceof BaseException) {
-            return Result.failed(ExceptionCodeEnum.FAILED,Objects.requireNonNull(e.getMessage()));
-        }
-        if(e instanceof MissingServletRequestParameterException){
-            return Result.failed(ExceptionCodeEnum.PRAM_NOT_MATCH, Objects.requireNonNull(e.getMessage()));
-        }
-        //未知错误
-        return Result.failed(ExceptionCodeEnum.ERROR,e.getMessage());
+    public Result<?> exceptionHandler(Exception e) {
+        log.error("Exception: " + e.getMessage(), e);
+        return Result.failed(ExceptionCodeEnum.ERROR);
     }
+
+
+
+//    /**
+//     * 处理所有异常，主要是提供给 Filter 使用
+//     * 因为 Filter 不走 SpringMVC 的流程，但是我们又需要兜底处理异常，所以这里提供一个全量的异常处理过程，保持逻辑统一。
+//     *
+//     * @param request 请求
+//     * @param ex 异常
+//     * @return 通用返回
+//     */
+//    public Result<?> allExceptionHandler(HttpServletRequest request, Throwable ex) {
+//        if (ex instanceof MissingServletRequestParameterException) {
+////            return missingServletRequestParameterExceptionHandler((MissingServletRequestParameterException) ex);
+//        }
+//        if (ex instanceof MethodArgumentTypeMismatchException) {
+////            return methodArgumentTypeMismatchExceptionHandler((MethodArgumentTypeMismatchException) ex);
+//        }
+//        if (ex instanceof MethodArgumentNotValidException) {
+////            return methodArgumentNotValidExceptionExceptionHandler((MethodArgumentNotValidException) ex);
+//        }
+//        if (ex instanceof BindException) {
+//            return bindExceptionHandler((BindException) ex);
+//        }
+//        if (ex instanceof ConstraintViolationException) {
+//            return constraintViolationExceptionHandler((ConstraintViolationException) ex);
+//        }
+//        if (ex instanceof ValidationException) {
+//            return validationException((ValidationException) ex);
+//        }
+//        if (ex instanceof NoHandlerFoundException) {
+//            return noHandlerFoundExceptionHandler(request, (NoHandlerFoundException) ex);
+//        }
+//        if (ex instanceof HttpRequestMethodNotSupportedException) {
+//            return httpRequestMethodNotSupportedExceptionHandler((HttpRequestMethodNotSupportedException) ex);
+//        }
+//        if (ex instanceof ServiceException) {
+//            return serviceExceptionHandler((ServiceException) ex);
+//        }
+//        if (ex instanceof AccessDeniedException) {
+//            return accessDeniedExceptionHandler(request, (AccessDeniedException) ex);
+//        }
+//        return defaultException(request, ex);
+//    }
 }

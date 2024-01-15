@@ -2,10 +2,20 @@ asb:
   version: 0.0.1
 
 spring:
+  application:
+    name: asb-admin
+#  profiles:
+#    active: dev
+  main:
+    allow-bean-definition-overriding: true
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+      enabled: true
+    mvc:
+      path-matching:
+        matching-strategy: ANT_PATH_MATCHER
   jackson:
     locale: zh_CN
     time-zone: GMT+8
@@ -49,3 +59,15 @@ sa-token:
   token-style: uuid
   is-log: true
   jwt-secret-key: t768pv1t5qkisahnpxsgyknkbxljns46
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /api-docs
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn

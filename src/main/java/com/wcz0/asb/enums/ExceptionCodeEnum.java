@@ -1,4 +1,6 @@
-package com.wcz0.asb.exception;
+package com.wcz0.asb.enums;
+
+import com.wcz0.asb.exception.ExceptionHandler;
 
 /**
  * @author wcz0
@@ -14,6 +16,7 @@ public enum ExceptionCodeEnum implements ExceptionHandler {
     FORBIDDEN(403, "没有相关权限"),
     NOT_FOUND(404, "没有找到相关数据"),
     ERROR(500, "系统异常"),
+    METHOD_NOT_ALLOWED(405, "请求方法不正确"),
     ;
 
     private final long code;

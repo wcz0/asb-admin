@@ -16,23 +16,18 @@ import java.util.Map;
  * @author wcz0
  */
 @Data
-@Schema(description = "公共返回")
 public class Result<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-    @Schema(description = "返回码")
     private long code;
-    @Schema(description = "返回信息")
     private String message;
-    @Schema(description = "返回数据")
     private T data;
 
     protected Result() {
     }
 
-    protected Result(long code, String message, T data) {
+    public Result(long code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;

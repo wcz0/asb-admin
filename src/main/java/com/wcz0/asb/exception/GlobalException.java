@@ -2,12 +2,17 @@ package com.wcz0.asb.exception;
 
 import com.wcz0.asb.enums.ExceptionCodeEnum;
 import com.wcz0.asb.response.Result;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -17,6 +22,9 @@ import java.io.Serializable;
 @Slf4j
 public class GlobalException {
 
+    /**
+     * 处理自定义异常
+     */
     @ExceptionHandler(BaseException.class)
     public Result<?> baseExceptionHandler(BaseException e) {
         log.error("BaseException: " + e.getMessage(), e);
@@ -28,6 +36,39 @@ public class GlobalException {
         log.error("Exception: " + e.getMessage(), e);
         return Result.failed(ExceptionCodeEnum.ERROR);
     }
+
+    /**
+     * 表单异常处理
+     * TODO: 后续添加到data里返回
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result<?> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+        log.warn("MethodArgumentNotValidException: " + e.getMessage(), e);
+        List<FieldError> fieldErrors = e.getBindingResult().getFieldErrors();
+        String errorMessage = fieldErrors.stream()
+                .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+                .collect(Collectors.joining(", "));
+        return Result.failed(ExceptionCodeEnum.VALIDATE_FAILED, errorMessage, null);
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public Result<?> missingServletRequestParameterExceptionHandler(MissingServletRequestParameterException e) {
+        log.warn("MissingServletRequestParameterException: " + e.getMessage(), e);
+        return Result.failed(ExceptionCodeEnum.VALIDATE_FAILED, e.getMessage(), null);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public Result<?> methodArgumentTypeMismatchExceptionHandler(MethodArgumentTypeMismatchException e) {
+        log.warn("MethodArgumentTypeMismatchException: " + e.getMessage(), e);
+        return Result.failed(ExceptionCodeEnum.VALIDATE_FAILED, e.getMessage(), null);
+    }
+
+    @ExceptionHandler(BindException.class)
+    public Result<?> bindExceptionHandler(BindException e) {
+        log.warn("BindException: " + e.getMessage(), e);
+        return Result.failed(ExceptionCodeEnum.VALIDATE_FAILED, e.getMessage(), null);
+    }
+
 
 
 

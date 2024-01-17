@@ -1,0 +1,35 @@
+package templates.${package}.${moduleName};
+
+import com.wcz0.asb.request.${}.LoginRequest;
+import com.wcz0.asb.request.admin.RegisterRequest;
+import com.wcz0.asb.response.admin.LoginResponse;
+import com.wcz0.asb.response.Result;
+import com.wcz0.asb.service.${moduleName}Service;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author wcz0
+ */
+@RestController("AdminAuthController")
+@RequestMapping("admin-api")
+@Tag(name="后台认证")
+public class ${modele}Controller {
+
+    @Autowired
+    private AdminUserService adminUserService;
+
+    @PostMapping("login")
+    @Operation(summary = "登录")
+    public Result<LoginResponse> login(@Validated @RequestBody LoginRequest request) {
+        return Result.success(adminUserService.login(request));
+    }
+
+    @PostMapping(value="register", consumes = "multipart/form-data")
+    @Operation(summary = "注册")
+    public Result<LoginResponse> register(@Validated @ModelAttribute RegisterRequest request) {
+        return Result.success(adminUserService.register(request));
+    }
+}

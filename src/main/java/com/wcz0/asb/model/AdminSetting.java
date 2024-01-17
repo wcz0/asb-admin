@@ -1,7 +1,5 @@
 package com.wcz0.asb.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,15 +13,11 @@ import java.time.LocalDateTime;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("users")
-@Schema(description = "用户")
-public class User extends Model<User> {
-    @TableId(type = IdType.ASSIGN_ID)
-    private Long id;
-    private String username;
-    private String password;
-    private String name;
-    private String avatar;
+@TableName("admin_settings")
+@Schema(description = "后台设置")
+public class AdminSetting extends Model<AdminSetting> {
+    private String key;
+    private String values;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

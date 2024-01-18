@@ -9,18 +9,18 @@ import com.wcz0.asb.response.Result;
 public class BaseService {
 
     public <T> Result<?> success(T data){
-        return new Result<>(ExceptionCodeEnum.SUCCESS.getCode(), ExceptionCodeEnum.SUCCESS.getMessage(), data);
+        return new Result<>(ExceptionCodeEnum.SUCCESS.getStatus(), ExceptionCodeEnum.SUCCESS.getMsg(), data);
     }
 
     public <T> Result<?> success(String string){
-        return new Result<>(ExceptionCodeEnum.SUCCESS.getCode(), string, null);
+        return new Result<>(ExceptionCodeEnum.SUCCESS.getStatus(), string, null);
     }
 
     public <T> Result<?> success(String string, T data){
-        return new Result<>(ExceptionCodeEnum.SUCCESS.getCode(), string, data);
+        return new Result<>(ExceptionCodeEnum.SUCCESS.getStatus(), string, data);
     }
 
     public Result<?> failed(String message){
-        return new Result<>(ExceptionCodeEnum.FAILED.getCode(), message, null);
+        return new Result<>(ExceptionCodeEnum.FAILED.getStatus(), message, null);
     }
 }

@@ -19,22 +19,22 @@ public enum ExceptionCodeEnum implements ExceptionHandler {
     METHOD_NOT_ALLOWED(405, "请求方法不正确"),
     ;
 
-    private final long code;
-    private final String message;
+    private final long status;
+    private final String msg;
 
-    private ExceptionCodeEnum(int code, String message){
-        this.code = code;
-        this.message = message;
+    private ExceptionCodeEnum(int status, String msg){
+        this.status = status;
+        this.msg = msg;
     }
 
     @Override
-    public long getCode() {
-        return code;
+    public long getStatus() {
+        return status;
     }
 
     @Override
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 }
 

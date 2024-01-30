@@ -1,6 +1,8 @@
-asb:
+asb-admin:
   version: 0.0.1
-
+website:
+ url: http://localhost:8080
+ footer: '2023 � asb-admin'
 spring:
   application:
     name: asb-admin
@@ -51,7 +53,7 @@ logging:
 id-generator:
   worker-id: 1
 sa-token:
-  token-name: token
+  token-name: Authorization
   timeout: 2592000
   active-timeout: -1
   is-concurrent: true
@@ -59,6 +61,8 @@ sa-token:
   token-style: uuid
   is-log: true
   jwt-secret-key: t768pv1t5qkisahnpxsgyknkbxljns46
+  token-prefix: Bearer
+
 
 springdoc:
   swagger-ui:

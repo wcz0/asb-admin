@@ -14,8 +14,13 @@ public class AuthFilter implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
-                .addPathPatterns("/**")
+                .addPathPatterns("/admin-api/**")
                 .excludePathPatterns("/admin-api/login")
-                .excludePathPatterns("/admin-api/register");
+                .excludePathPatterns("/admin-api/register")
+                .excludePathPatterns("/admin-api/logout")
+                .excludePathPatterns("/admin-api/_settings")
+                .excludePathPatterns("/admin-api/_download_export")
+                .excludePathPatterns("/admin-api/captcha")
+                .excludePathPatterns("/admin-api/no-content");
     }
 }

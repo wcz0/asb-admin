@@ -25,11 +25,11 @@ public class GlobalException {
     /**
      * 处理自定义异常
      */
-    @ExceptionHandler(BaseException.class)
-    public Result<?> baseExceptionHandler(BaseException e) {
-        log.error("BaseException: " + e.getMessage(), e);
-        return Result.failed(e.getMessage());
-    }
+//    @ExceptionHandler(BaseException.class)
+//    public Result<?> baseExceptionHandler(BaseException e) {
+//        log.error("BaseException: " + e.getMessage(), e);
+//        return Result.failed(e.getMessage());
+//    }
 
     @ExceptionHandler(Exception.class)
     public Result<?> exceptionHandler(Exception e) {

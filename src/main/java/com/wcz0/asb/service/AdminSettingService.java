@@ -1,10 +1,11 @@
 package com.wcz0.asb.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.wcz0.asb.model.AdminSetting;
 import com.wcz0.asb.response.Result;
+import com.wcz0.asb.response.admin.AdminSettingResponse;
 import com.wcz0.asb.service.dao.AdminSettingDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,9 @@ public class AdminSettingService extends BaseService{
 
     @Autowired
     AdminSettingDao adminSettingDao;
+
+    @Value("${spring.application.name}")
+    private String app_name;
 
     @Transactional
     public Result store(Map<String, String> data){
@@ -34,7 +38,10 @@ public class AdminSettingService extends BaseService{
         return Result.success();
     }
 
-//    public Result get
-
+    public Result<AdminSettingResponse> index(){
+        AdminSettingResponse adminSettingResponse = new AdminSettingResponse();
+        adminSettingResponse.setApp_name(app_name);
+        return Result.success(adminSettingResponse);
+    }
 
 }

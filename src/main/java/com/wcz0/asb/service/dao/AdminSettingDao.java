@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  * @author wcz0
  */
 @Service
-
 public class AdminSettingDao extends ServiceImpl<AdminSettingMapper, AdminSetting> implements IService<AdminSetting> {
 
 

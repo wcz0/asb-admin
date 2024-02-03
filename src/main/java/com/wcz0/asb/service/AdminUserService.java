@@ -25,6 +25,7 @@ public class AdminUserService extends BaseService {
     @Autowired
     private AdminUserDao adminUserDao;
 
+
     public Result<?> login(LoginRequest loginRequest) {
         QueryWrapper<AdminUser> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", loginRequest.getUsername());
@@ -66,7 +67,6 @@ public class AdminUserService extends BaseService {
         if (adminUser == null) {
             return this.failed("用户不存在");
         }
-        currentUserResponse.setName(adminUser.getName());
         currentUserResponse.setAvatar("http://demo.owladmin.com/admin/default-avatar.png");
         // get view
         Object menu = AmisFactory.DropdownButton()

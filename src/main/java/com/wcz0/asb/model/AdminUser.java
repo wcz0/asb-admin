@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName("admin_users")
 @Schema(description = "后台用户")
+@Repository
 public class AdminUser extends Model<AdminUser> {
     @TableId(type = IdType.AUTO)
     @Schema(description = "用户ID")

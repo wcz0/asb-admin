@@ -1,5 +1,6 @@
 package com.wcz0.asb.service;
 
+import com.wcz0.asb.model.AdminMenu;
 import com.wcz0.asb.response.Result;
 import com.wcz0.asb.service.dao.AdminMenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,14 @@ public class AdminMenuService {
     @Autowired
     AdminMenuDao adminMenuDao;
 
+
     public Result all(){
 
         return Result.success(adminMenuDao.list());
+    }
+
+    public Result getMenus(){
+//        return Result.success(adminMenuDao.getMenus());
+        return Result.success();
     }
 }

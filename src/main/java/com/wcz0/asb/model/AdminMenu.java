@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @TableName("admin_menus")
 @Schema(description = "后台菜单")
+@Repository
 public class AdminMenu extends Model<AdminMenu> {
     @TableId(type = IdType.AUTO)
     private Integer id;

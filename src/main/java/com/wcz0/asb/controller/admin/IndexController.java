@@ -5,6 +5,7 @@ package com.wcz0.asb.controller.admin;
  */
 
 import com.wcz0.asb.response.Result;
+import com.wcz0.asb.service.AdminMenuService;
 import com.wcz0.asb.service.AdminSettingService;
 import com.wcz0.asb.service.AdminUserService;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,6 +23,9 @@ public class IndexController {
 
     @Autowired
     AdminUserService adminUserService;
+
+    @Autowired
+    AdminMenuService adminMenuService;
 
     @GetMapping("_settings")
     public Result settings() {
@@ -58,6 +62,11 @@ public class IndexController {
     @GetMapping("current-user")
     public Result currentUser() {
         return adminUserService.currentUser();
+    }
+
+    @GetMapping("menus")
+    public Result menus() {
+        return adminMenuService.getMenus();
     }
 
 }

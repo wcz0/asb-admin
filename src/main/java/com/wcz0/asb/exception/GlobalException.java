@@ -1,5 +1,6 @@
 package com.wcz0.asb.exception;
 
+import cn.dev33.satoken.exception.NotLoginException;
 import com.wcz0.asb.enums.ExceptionCodeEnum;
 import com.wcz0.asb.response.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,12 @@ public class GlobalException {
 //        log.error("BaseException: " + e.getMessage(), e);
 //        return Result.failed(e.getMessage());
 //    }
+
+    @ExceptionHandler(NotLoginException.class)
+    public Result<?> notLoginExceptionHandler(NotLoginException e) {
+        log.error("NotLoginException: " + e.getMessage(), e);
+        return Result.failed(ExceptionCodeEnum.UNAUTHORIZED);
+    }
 
     @ExceptionHandler(Exception.class)
     public Result<?> exceptionHandler(Exception e) {

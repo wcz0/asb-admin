@@ -21,7 +21,7 @@ public class AuthController {
     private AdminUserService adminUserService;
 
     @PostMapping("login")
-    public Result login(@Validated @ModelAttribute LoginRequest request) {
+    public Result login(@Validated @RequestBody LoginRequest request) {
         return adminUserService.login(request);
     }
 

@@ -1,8 +1,11 @@
 asb-admin:
   version: 0.0.1
+
 website:
  url: http://localhost:8080
- footer: '2023 � asb-admin'
+ footer: '2023 asb-admin'
+ logo: /logo.png
+
 spring:
   application:
     name: asb-admin

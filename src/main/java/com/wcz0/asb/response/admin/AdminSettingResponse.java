@@ -16,7 +16,7 @@ public class AdminSettingResponse {
     private Layout layout;
     private String locale = "zh_CN";
     // 浏览器标题
-    private Nav nav;
+    private Nav nav = new Nav();
     // logo
     private String logo;
 
@@ -27,18 +27,18 @@ public class AdminSettingResponse {
 
     @Data
     public static class Assets {
-        private String[] js;
-        private String[] css;
-        private String[] scripts;
-        private String[] styles;
+        private String[] js = new String[0];
+        private String[] css = new String[0];
+        private String[] scripts = new String[0];
+        private String[] styles = new String[0];
     }
 
     @Data
     public static class Layout {
 
-        private String title = "%title% - Asb-admin ";
-        private String footer;
-        private Header header;
+        private String title = "%title% - Asb admin ";
+        private String footer = "<a href=\\\"https://github.com/wcz0/asb-admin\\\" target=\\\"_blank\\\">Asb Admin</a>";
+        private Header header = new Header();
         private String[] keep_alive_exclude;
 
         @Data

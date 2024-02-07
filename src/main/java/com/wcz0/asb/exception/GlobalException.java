@@ -45,6 +45,15 @@ public class GlobalException {
     }
 
     /**
+     * 处理业务异常
+     */
+    @ExceptionHandler(CasbinException.class)
+    public Result<?> casbinExceptionHandler(CasbinException e) {
+        log.error("CasbinException: " + e.getMessage(), e);
+        return Result.failed(ExceptionCodeEnum.FORBIDDEN);
+    }
+
+    /**
      * 表单异常处理
      * TODO: 后续添加到data里返回
      */

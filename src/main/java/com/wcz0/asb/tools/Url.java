@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @author wcz0
  */
 @Component
-public class UrlTool {
+public class Url {
 
     @Value("${website.url}")
     private String url;

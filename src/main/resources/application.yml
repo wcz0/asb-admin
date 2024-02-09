@@ -92,7 +92,7 @@ casbin:
   #Default use jdbc, and use the built-in h2 database for memory storage
   storeType: jdbc
   #Customized policy table name when use jdbc, casbin_rule as default.
-  tableName: casbin_rule
+  tableName: admin_casbin_rule
   #Data source initialization policy [create (automatically create data table, no longer initialized if created), never (always do not initialize)]
   initializeSchema: create
   #Local model configuration file address, the default reading location: classpath: casbin/model.conf
@@ -109,5 +109,3 @@ casbin:
   #CasbinWatcher notification mode, defaults to use Redis for notification synchronization, temporarily only supports Redis
   #After opening Watcher, you need to manually add spring-boot-starter-data-redis dependency.
   watcherType: redis
-  exception:
-    ... See Schedule A for exception settings.

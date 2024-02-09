@@ -4,7 +4,7 @@ import com.wcz0.asb.model.AdminSetting;
 import com.wcz0.asb.response.Result;
 import com.wcz0.asb.response.admin.AdminSettingResponse;
 import com.wcz0.asb.service.dao.AdminSettingDao;
-import com.wcz0.asb.tools.UrlTool;
+import com.wcz0.asb.tools.Url;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class AdminSettingService extends BaseService{
     private String logo;
 
     @Resource
-    private UrlTool urlTool;
+    private Url url;
 
     @Transactional
     public Result store(Map<String, String> data){
@@ -49,7 +49,7 @@ public class AdminSettingService extends BaseService{
     public Result<AdminSettingResponse> index(){
         AdminSettingResponse adminSettingResponse = new AdminSettingResponse();
         adminSettingResponse.setApp_name(app_name);
-        adminSettingResponse.setLogo(urlTool.get(logo));
+        adminSettingResponse.setLogo(url.get(logo));
         return Result.success(adminSettingResponse);
     }
 

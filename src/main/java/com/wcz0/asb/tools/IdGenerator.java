@@ -1,4 +1,4 @@
-package com.wcz0.asb.component;
+package com.wcz0.asb.tools;
 
 import com.github.yitter.contract.IdGeneratorOptions;
 import com.github.yitter.idgen.YitIdHelper;

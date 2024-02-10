@@ -2,7 +2,6 @@ package com.wcz0.asb.interceptor;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.wcz0.asb.exception.CasbinException;
-import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,7 +18,7 @@ import java.util.regex.Pattern;
  */
 @Component
 @Slf4j
-public class CasbinInterceptor implements HandlerInterceptor {
+public class AdminCasbinInterceptor implements HandlerInterceptor {
 
     @Autowired
     private Enforcer enforcer;

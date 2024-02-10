@@ -32,18 +32,21 @@ spring:
     password: root
   data:
     redis:
-      host: 192.168.50.3
+      host: localhost
       port: 6379
-      password:
       timeout: 30000
-      database: 3
-      jedis:
+      database: 0
+      lettuce:
         pool:
-          max-active: 200
+          max-active: 8
           max-wait: -1
-          max-idle: 10
+          max-idle: 8
           min-idle: 0
-          time-between-eviction-runs: -1
+mybatis-plus:
+  global-config:
+    db-config:
+      column-underline: true
+      capital-mode: true
 
 debug: true
 logging:
@@ -83,7 +86,7 @@ casbin:
   #Whether to enable Casbin, it is enabled by default.
   enableCasbin: true
   #Whether to use thread-synchronized Enforcer, default false
-  useSyncedEnforcer: false
+  useSyncedEnforcer: true
   #Whether to enable automatic policy saving, if the adapter supports this function, it is enabled by default.
   autoSave: true
   #Storage type [file, jdbc], currently supported jdbc database [mysql (mariadb), h2, oracle, postgresql, db2]
@@ -96,7 +99,7 @@ casbin:
   #Data source initialization policy [create (automatically create data table, no longer initialized if created), never (always do not initialize)]
   initializeSchema: create
   #Local model configuration file address, the default reading location: classpath: casbin/model.conf
-  model: classpath:casbin/model.conf
+  model: classpath:casbin/admin-model.conf
   #If the model configuration file is not found in the default location and casbin.model is not set correctly, the built-in default rbac model is used, which takes effect by default.
   useDefaultModelIfModelNotSetting: true
   #Local policy configuration file address, the default reading location: classpath: casbin/policy.csv
@@ -109,3 +112,5 @@ casbin:
   #CasbinWatcher notification mode, defaults to use Redis for notification synchronization, temporarily only supports Redis
   #After opening Watcher, you need to manually add spring-boot-starter-data-redis dependency.
   watcherType: redis
+  watcher-lettuce-redis-type: standalone
+

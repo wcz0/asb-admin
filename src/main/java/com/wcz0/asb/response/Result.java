@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author wcz0
@@ -43,6 +45,12 @@ public class Result<T> implements Serializable {
     public static <T> Result<T> success(long code, String message, T data) {
         return new Result<>(code, message, data);
     }
+
+    public static Result<List<Map<String, Object>>> success(List<Map<String, Object>> data) {
+        return new Result<>(ExceptionCodeEnum.SUCCESS.getStatus(), ExceptionCodeEnum.SUCCESS.getMsg(), data);
+    }
+
+
 
     public static <T> Result<T> failed() {
         return new Result<>(ExceptionCodeEnum.FAILED.getStatus(), ExceptionCodeEnum.FAILED.getMsg(), null);

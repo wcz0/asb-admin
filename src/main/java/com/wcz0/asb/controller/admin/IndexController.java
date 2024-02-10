@@ -4,12 +4,15 @@ package com.wcz0.asb.controller.admin;
  * @author wcz0
  */
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wcz0.asb.response.Result;
 import com.wcz0.asb.service.AdminMenuService;
 import com.wcz0.asb.service.AdminSettingService;
 import com.wcz0.asb.service.AdminUserService;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -67,6 +70,11 @@ public class IndexController {
     @GetMapping("menus")
     public Result menus() {
         return adminMenuService.getMenus();
+    }
+
+    @PutMapping("user_setting")
+    public Result userSetting(@JsonInclude(JsonInclude.Include.NON_NULL) @RequestBody Map<String, String> data) {
+        return adminUserService.userSetting(data);
     }
 
 }

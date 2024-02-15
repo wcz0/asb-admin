@@ -15,4 +15,22 @@ public class Url {
     public String get(String url) {
         return this.url + url;
     }
+
+
+    public String get(){
+        return this.url;
+    }
+
+    /**
+     * 获取后台接口地址
+     * @param url String
+     * @return String
+     */
+    public String getAdmin(String url){
+        return this.url + "/admin-api" + url;
+    }
+
+    public String getAdmin(){
+        return this.url + "/admin-api";
+    }
 }

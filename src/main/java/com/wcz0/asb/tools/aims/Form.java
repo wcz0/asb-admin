@@ -494,6 +494,10 @@ public class Form extends BaseRenderer
         return set("title", value);
     }
 
+    public Form title(){
+        return set("title", "");
+    }
+
     /**
      * 指定为表单渲染器。
      */

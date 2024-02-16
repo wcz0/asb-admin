@@ -33,4 +33,16 @@ public class Url {
     public String getAdmin(){
         return this.url + "/admin-api";
     }
+
+    /**
+     * 上传图片地址
+     * @return
+     */
+    public String uploadImageUrl(){
+        return this.url + "/admin-api/upload_image";
+    }
+
+    public String uploadFileUrl(){
+        return this.url + "/admin-api/upload_file";
+    }
 }

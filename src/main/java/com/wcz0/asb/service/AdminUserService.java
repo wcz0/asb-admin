@@ -15,6 +15,8 @@ import com.wcz0.asb.service.dao.AdminUserDao;
 import com.wcz0.asb.tools.Url;
 import com.wcz0.asb.tools.aims.AmisFactory;
 import com.wcz0.asb.tools.aims.Form;
+import com.wcz0.asb.tools.aims.ImageControl;
+import com.wcz0.asb.tools.aims.TextControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -126,10 +128,10 @@ public class AdminUserService extends BaseService {
                 adminUser.setPassword(hashedPwd);
             }
         }
-        if(StringUtils.hasText(request.getAvatar())){
+        if (StringUtils.hasText(request.getAvatar())) {
             adminUser.setAvatar(request.getAvatar());
         }
-        if(StringUtils.hasText(request.getName())){
+        if (StringUtils.hasText(request.getName())) {
             adminUser.setName(request.getName());
         }
         adminUser.setUpdatedAt(LocalDateTime.now());
@@ -150,10 +152,31 @@ public class AdminUserService extends BaseService {
                 .title()
                 .panelClassName("px-48 m:px-0")
                 .mode("horizontal")
-                .data()
-                .api("put", url.getAdmin("/user_setting"))
-                .
-        return this.success();
+                .data(data)
+                .api("put:" + url.getAdmin("/user_setting"))
+                .body(new Object[]{
+                        new ImageControl()
+                                .label("头像")
+                                .name("avatar")
+                                .receiver(url.uploadImageUrl()),
+                        new TextControl()
+                                .label("用户名")
+                                .name("name")
+                                .required(),
+                        new TextControl()
+                                .label("原密码")
+                                .name("old_password")
+                                .type("password"),
+                        new TextControl()
+                                .label("新密码")
+                                .name("password")
+                                .type("password"),
+                        new TextControl()
+                                .label("确认密码")
+                                .name("confirm_password")
+                                .type("password")
+                });
+        return Result.success(form);
     }
 
 

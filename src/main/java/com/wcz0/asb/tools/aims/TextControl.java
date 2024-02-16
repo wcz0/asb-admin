@@ -475,6 +475,10 @@ public class TextControl extends BaseRenderer
         return set("required", value);
     }
 
+    public TextControl required(){
+        return set("required", true);
+    }
+
     /**
      * 点清除按钮时，将表单项设置成当前配置的值。
      */

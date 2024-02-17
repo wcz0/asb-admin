@@ -9,6 +9,7 @@ import com.wcz0.asb.response.Result;
 import com.wcz0.asb.service.AdminMenuService;
 import com.wcz0.asb.service.AdminSettingService;
 import com.wcz0.asb.service.AdminUserService;
+import com.wcz0.asb.service.IndexService;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,9 @@ public class IndexController {
 
     @Autowired
     AdminMenuService adminMenuService;
+
+    @Autowired
+    IndexService indexService;
 
     @GetMapping("_settings")
     public Result settings() {
@@ -78,5 +82,10 @@ public class IndexController {
     @GetMapping("user_setting")
     public Result userSetting() {
         return adminUserService.getUserSetting();
+    }
+
+    @GetMapping("dashboard")
+    public Result dashboard() {
+        return indexService.dashboard();
     }
 }

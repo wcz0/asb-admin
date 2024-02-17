@@ -96,12 +96,14 @@ public class AdminUserService extends BaseService {
                                 .iconClassName("pr-2")
                                 .icon("fa fa-user-gear")
                                 .label("用户设置")
-                                .onClick("window.location.hash = '#/user_setting'"),
+                                .onClick("window.location.hash = \"#/user_setting\"")
+                                .render(),
                         AmisFactory.VanillaAction()
                                 .iconClassName("pr-2")
                                 .icon("fa fa-sign-out-alt")
                                 .label("退出登录")
-                                .onClick("window.location.hash = '#/logout'")
+                                .onClick("window.location.hash = \"#/logout\"")
+                                .render()
                 })
                 .render();
         currentUserResponse.setMenus(menu);
@@ -162,19 +164,23 @@ public class AdminUserService extends BaseService {
                         new TextControl()
                                 .label("用户名")
                                 .name("name")
-                                .required(),
+                                .required()
+                                .render(),
                         new TextControl()
                                 .label("原密码")
                                 .name("old_password")
-                                .type("password"),
+                                .type("password")
+                                .render(),
                         new TextControl()
                                 .label("新密码")
                                 .name("password")
-                                .type("password"),
+                                .type("password")
+                                .render(),
                         new TextControl()
                                 .label("确认密码")
                                 .name("confirm_password")
                                 .type("password")
+                                .render()
                 });
         return Result.success(form);
     }

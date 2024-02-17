@@ -13,6 +13,8 @@ spring:
 #    active: dev
   main:
     allow-bean-definition-overriding: true
+  messages:
+    basename: lang/messages
   servlet:
     multipart:
       max-file-size: 50MB
@@ -42,6 +44,7 @@ spring:
           max-wait: -1
           max-idle: 8
           min-idle: 0
+
 mybatis-plus:
   global-config:
     db-config:
@@ -113,4 +116,3 @@ casbin:
   #After opening Watcher, you need to manually add spring-boot-starter-data-redis dependency.
   watcherType: redis
   watcher-lettuce-redis-type: standalone
-

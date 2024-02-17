@@ -22,6 +22,7 @@ public class AdminCasbinConfig implements WebMvcConfigurer {
                 // 基础不需要鉴权的路由
                 .excludePathPatterns("/admin-api/menus")
                 .excludePathPatterns("/admin-api/user_setting")
+                .excludePathPatterns("/admin-api/current_user")
                 // 公共
                 .excludePathPatterns("/admin-api/login")
                 .excludePathPatterns("/admin-api/register")

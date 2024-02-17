@@ -35,6 +35,10 @@ public class AdminCasbinInterceptor implements HandlerInterceptor {
             path = "/" + matcher.group(1) + "/{id}";
         }
         String method = request.getMethod();
+        // 超级管理员
+        if("1".equals(uid)){
+            return true;
+        }
         if (enforcer.enforce(uid, path, method)) {
             return true;
         }else{

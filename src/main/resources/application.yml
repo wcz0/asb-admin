@@ -72,7 +72,6 @@ sa-token:
   jwt-secret-key: t768pv1t5qkisahnpxsgyknkbxljns46
   token-prefix: Bearer
 
-
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

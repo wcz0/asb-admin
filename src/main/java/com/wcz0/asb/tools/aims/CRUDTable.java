@@ -203,6 +203,11 @@ public class CRUDTable extends BaseRenderer
         return set("filterTogglable", value);
     }
 
+    public CRUDTable filterTogglable()
+    {
+        return set("filterTogglable", true);
+    }
+
     /**
      * 是否开启底部展示功能，适合移动端展示
      */
@@ -429,7 +434,12 @@ public class CRUDTable extends BaseRenderer
     /**
      * 每页显示多少个空间成员的配置如： [10, 20, 50, 100]。
      */
-    public CRUDTable perPageAvailable(boolean value)
+    public CRUDTable perPageAvailable(Object value)
+    {
+        return set("perPageAvailable", value);
+    }
+
+    public CRUDTable perPageAvailable(Integer[] value)
     {
         return set("perPageAvailable", value);
     }

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoleController {
 
     @GetMapping("")
-    public Result index() {
+    public Result list() {
         return Result.success();
     }
 }

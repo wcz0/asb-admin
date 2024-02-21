@@ -64,6 +64,8 @@ public class BaseService {
                 });
     }
 
+
+
     /**
      * 创建按钮
      * TODO: 没有处理url链接
@@ -101,10 +103,11 @@ public class BaseService {
     }
 
 
-    public String getStorePath() {
-        return "post:" + url.getAdmin();
-    }
-
+    /**
+     * amis方法, 用于创建amis组件
+     * @param type
+     * @return
+     */
     public Object amis(String type) {
         return new Component().setType(type);
     }

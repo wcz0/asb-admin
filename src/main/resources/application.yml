@@ -28,8 +28,8 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
-    url: jdbc:mysql://localhost:3306/asb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8&allowPublicKeyRetrieval=true
-    name: asb
+    url: jdbc:mysql://localhost:3306/asb-admin?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8&allowPublicKeyRetrieval=true
+    name: asb-admin
     username: root
     password: root
   data:

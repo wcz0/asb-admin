@@ -1,5 +1,6 @@
 package com.wcz0.asb.controller.admin;
 
+import com.wcz0.asb.controller.BaseController;
 import com.wcz0.asb.response.Result;
 import com.wcz0.asb.service.AdminRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

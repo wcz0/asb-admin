@@ -1,5 +1,7 @@
 package com.wcz0.asb.controller.admin;
 
+import com.wcz0.asb.controller.BaseController;
+
 /**
  * @author wcz0
  */
@@ -18,7 +20,7 @@ import java.util.Map;
 
 @RestController("AdminIndexController")
 @RequestMapping("admin-api")
-public class IndexController {
+public class IndexController extends BaseController {
 
     @Autowired
     AdminSettingService adminSettingService;

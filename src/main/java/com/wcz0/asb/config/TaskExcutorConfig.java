@@ -15,9 +15,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 @Configuration
 public class TaskExcutorConfig {
     //普通模式
-    //核心线程池数量
+    /**核心线程池数量*/
     private final int taskCorePoolSize = 20;
-    //最大线程
+    /**最大线程*/
     private final int taskMaxPoolSize = 100;
     //缓存队列条数
     private final int taskQueueCapacity = 200;

@@ -23,7 +23,7 @@ public class AdminSettingService extends BaseService{
     AdminSettingDao adminSettingDao;
 
     @Value("${spring.application.name}")
-    private String app_name;
+    private String appName;
 
     @Value("${website.logo}")
     private String logo;
@@ -31,7 +31,7 @@ public class AdminSettingService extends BaseService{
     @Resource
     private Url url;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Result store(Map<String, String> data){
         try{
             for (Map.Entry<String, String> entry : data.entrySet()) {
@@ -48,7 +48,7 @@ public class AdminSettingService extends BaseService{
 
     public Result<AdminSettingResponse> index(){
         AdminSettingResponse adminSettingResponse = new AdminSettingResponse();
-        adminSettingResponse.setApp_name(app_name);
+        adminSettingResponse.setApp_name(appName);
         adminSettingResponse.setLogo(url.get(logo));
         return Result.success(adminSettingResponse);
     }

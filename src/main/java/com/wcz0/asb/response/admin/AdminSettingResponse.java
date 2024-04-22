@@ -15,9 +15,9 @@ public class AdminSettingResponse {
     private Assets assets;
     private Layout layout;
     private String locale = "zh_CN";
-    // 浏览器标题
+    /**浏览器标题 */
     private Nav nav = new Nav();
-    // logo
+    /**logo */
     private String logo;
 
     private boolean login_captcha = false;

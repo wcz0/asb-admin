@@ -45,13 +45,13 @@ public class AdminUserService extends BaseService {
         queryWrapper.eq("username", loginRequest.getUsername());
         AdminUser adminUser = adminUserDao.getOne(queryWrapper);
         if (adminUser == null) {
-            return this.failed("用户不存在");
+            return Result.failed("用户不存在");
         }
         if (!BCrypt.checkpw(loginRequest.getPassword(), adminUser.getPassword())) {
-            return this.failed("密码错误");
+            return Result.failed("密码错误");
         }
         StpUtil.login(adminUser.getId());
-        return this.success(new LoginResponse().setToken(StpUtil.getTokenValue()));
+        return Result.success(new LoginResponse().setToken(StpUtil.getTokenValue()));
     }
 
     public Result<?> register(RegisterRequest registerRequest) {
@@ -59,7 +59,7 @@ public class AdminUserService extends BaseService {
         queryWrapper.eq("username", registerRequest.getUsername());
         AdminUser adminUser = adminUserDao.getOne(queryWrapper);
         if (adminUser != null) {
-            return this.failed("用户已存在");
+            return Result.failed("用户已存在");
         }
         String hashedPwd = BCrypt.hashpw(registerRequest.getPassword(), BCrypt.gensalt());
         adminUser = new AdminUser();
@@ -68,10 +68,10 @@ public class AdminUserService extends BaseService {
         adminUser.setName(registerRequest.getName());
         boolean bool = adminUserDao.save(adminUser);
         if (!bool) {
-            return this.failed("注册失败");
+            return Result.failed("注册失败");
         }
         StpUtil.login(adminUser.getId());
-        return this.success(new LoginResponse().setToken(StpUtil.getTokenValue()));
+        return Result.success(new LoginResponse().setToken(StpUtil.getTokenValue()));
     }
 
     public Result<?> currentUser() {
@@ -79,7 +79,7 @@ public class AdminUserService extends BaseService {
         // get user info
         AdminUser adminUser = adminUserDao.getById(StpUtil.getLoginIdAsLong());
         if (adminUser == null) {
-            return this.failed("用户不存在");
+            return Result.failed("用户不存在");
         }
         currentUserResponse.setAvatar("http://demo.owladmin.com/admin/default-avatar.png");
         // get view
@@ -107,13 +107,13 @@ public class AdminUserService extends BaseService {
                 })
                 .render();
         currentUserResponse.setMenus(menu);
-        return this.success(currentUserResponse);
+        return Result.success(currentUserResponse);
     }
 
     public Result<?> saveUserSetting(UserSettingRequest request) {
         AdminUser adminUser = adminUserDao.getById(StpUtil.getLoginIdAsLong());
         if (adminUser == null) {
-            return this.failed("用户不存在");
+            return Result.failed("用户不存在");
         }
         if (!StringUtils.hasText(request.getPassword()) && !StringUtils.hasText(request.getOldPassword()) && !StringUtils.hasText(request.getConfirmPassword())) {
             String password = request.getPassword();
@@ -121,10 +121,10 @@ public class AdminUserService extends BaseService {
             String confirmPassword = request.getConfirmPassword();
             if (password != null && oldPassword != null) {
                 if (!BCrypt.checkpw(oldPassword, adminUser.getPassword())) {
-                    return this.failed("原密码错误");
+                    return Result.failed("原密码错误");
                 }
                 if (!password.equals(confirmPassword)) {
-                    return this.failed("两次密码不一致");
+                    return Result.failed("两次密码不一致");
                 }
                 String hashedPwd = BCrypt.hashpw(password, BCrypt.gensalt());
                 adminUser.setPassword(hashedPwd);
@@ -142,12 +142,12 @@ public class AdminUserService extends BaseService {
                 : Result.failed("用户设置保存失败");
     }
 
-    public Result getUserSetting() {
+    public Result<?> getUserSetting() {
         QueryWrapper<AdminUser> queryWrapper = new QueryWrapper<AdminUser>()
                 .select("id", "name", "avatar", "");
         AdminUser adminUser = adminUserDao.getById(StpUtil.getLoginIdAsLong());
         if (adminUser == null) {
-            return this.failed("用户不存在");
+            return Result.failed("用户不存在");
         }
         Map<String, Object> data = BeanUtils.beanToMap(adminUser);
         Form form = new Form()

@@ -1,7 +1,5 @@
 package com.wcz0.asb.service;
 
-import cn.hutool.core.lang.tree.TreeNodeConfig;
-import cn.hutool.core.lang.tree.TreeUtil;
 import com.wcz0.asb.enums.ActionEnum;
 import com.wcz0.asb.model.AdminMenu;
 import com.wcz0.asb.response.Result;
@@ -26,7 +24,7 @@ public class AdminMenuService {
     AdminMenuDao adminMenuDao;
 
 
-    public Result all(){
+    public Result<?> all(){
 
         return Result.success(adminMenuDao.list());
     }
@@ -47,7 +45,7 @@ public class AdminMenuService {
         List<Map<String, Object>> data = new ArrayList<>();
         for (AdminMenu item : list) {
             if (item.getParentId().equals(parentId)) {
-                Map<String, Object> temp = new HashMap<>();
+                Map<String, Object> temp = new HashMap<>(15);
                 String idStr = "[" + item.getId() + "]";
                 temp.put("name", StringUtils.hasText(parentName) ? parentName + idStr : idStr);
                 temp.put("path", item.getUrl());
@@ -57,7 +55,7 @@ public class AdminMenuService {
                 //TYPE_ROUTE = 1;const TYPE_LINK  = 2;
                 temp.put("is_link", item.getUrlType() == 2);
 
-                Map<String, Object> meta = new HashMap<>();
+                Map<String, Object> meta = new HashMap<>(10);
                 meta.put("title", item.getTitle());
                 meta.put("icon", item.getIcon() != null ? item.getIcon() : "-");
                 meta.put("hide", item.getVisible() == 0);
@@ -86,24 +84,23 @@ public class AdminMenuService {
         // Remove query parameters
         url = url.replaceAll("\\?.*", "");
 
-        if (url.isEmpty() || item.containsKey("children")) {
+        final String childrenKey = "children";
+        if (url.isEmpty() || item.containsKey(childrenKey)) {
             return new ArrayList<>();
         }
 
         String finalUrl = url;
         Function<String,Map<String, Object>> menu = (action) -> {
-            Map<String, Object> menuMap = new HashMap<>();
+            Map<String, Object> menuMap = new HashMap<>(10);
             menuMap.put("name", item.get("name") + "-" + action);
             menuMap.put("path", finalUrl + getPathForAction(action));
             menuMap.put("component", "amis");
 
-            Map<String, Object> meta = new HashMap<>();
-//            Console.log();
+            Map<String, Object> meta = new HashMap<>(5);
             HashMap<String, String> metaObj = (HashMap<String, String>) item.get("meta");
 
             meta.put("hide", true);
             meta.put("icon", metaObj.get("icon"));
-//            meta.put("title", metaObj.get("title") + " - " + "admin." + ActionEnum.get(action));
             meta.put("title", metaObj.get("title") + " - " + ActionEnum.get(action));
             menuMap.put("meta", meta);
             return menuMap;
@@ -117,12 +114,16 @@ public class AdminMenuService {
         return routeList;
     }
 
+    private static final String ACTION_CREATE = "create";
+    private static final String ACTION_SHOW = "show";
+    private static final String ACTION_EDIT = "edit";
+
     private String getPathForAction(String action) {
-        if ("create".equals(action)) {
+        if (ACTION_CREATE.equals(action)) {
             return "/create";
-        } else if ("show".equals(action)) {
+        } else if (ACTION_SHOW.equals(action)) {
             return "/:id";
-        } else if ("edit".equals(action)) {
+        } else if (ACTION_EDIT.equals(action)) {
             return "/:id/edit";
         } else {
             return "";

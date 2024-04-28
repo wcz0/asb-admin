@@ -2,15 +2,19 @@ asb-admin:
   version: 0.0.1
 
 website:
- url: http://localhost:8080
- footer: '2023 asb-admin'
- logo: /logo.png
+  url: http://localhost:4001
+  footer: "2023 asb-admin"
+  logo: /logo.png
+  admin-logo: /admin/logo.png
+
+server:
+  port: 4001
 
 spring:
   application:
     name: asb-admin
-#  profiles:
-#    active: dev
+  mvc:
+    static-path-pattern: /admin/**
   main:
     allow-bean-definition-overriding: true
   messages:
@@ -20,16 +24,13 @@ spring:
       max-file-size: 50MB
       max-request-size: 50MB
       enabled: true
-    mvc:
-      path-matching:
-        matching-strategy: ANT_PATH_MATCHER
   jackson:
     locale: zh_CN
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   datasource:
     url: jdbc:mysql://localhost:3306/asb-admin?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimeZone=GMT+8&allowPublicKeyRetrieval=true
-    name: asb-admin
+    name: asb_admin
     username: root
     password: root
   data:
@@ -44,6 +45,12 @@ spring:
           max-wait: -1
           max-idle: 8
           min-idle: 0
+  web:
+    resources:
+      static-locations:
+        - classpath:/static/admin/
+
+
 
 mybatis-plus:
   global-config:

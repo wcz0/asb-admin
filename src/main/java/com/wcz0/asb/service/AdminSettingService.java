@@ -25,14 +25,14 @@ public class AdminSettingService extends BaseService{
     @Value("${spring.application.name}")
     private String appName;
 
-    @Value("${website.logo}")
+    @Value("${website.admin-logo}")
     private String logo;
 
     @Resource
     private Url url;
 
     @Transactional(rollbackFor = Exception.class)
-    public Result store(Map<String, String> data){
+    public Result<?> store(Map<String, String> data){
         try{
             for (Map.Entry<String, String> entry : data.entrySet()) {
                 AdminSetting adminSetting = new AdminSetting();

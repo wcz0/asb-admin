@@ -3,12 +3,26 @@ package com.wcz0.asb.enums;
 /**
  * @author wcz0
  */
-
 public enum ActionEnum {
+    /**
+     * 操作.
+     */
     ACTIONS("操作"),
+    /**
+     * 新增.
+     */
     CREATE("新增"),
+    /**
+     * 编辑.
+     */
     EDIT("编辑"),
+    /**
+     * 查看.
+     */
     SHOW("查看"),
+    /**
+     * 删除.
+     */
     DELETE("删除");
 
     private final String chinese;

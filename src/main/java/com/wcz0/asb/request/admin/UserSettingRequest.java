@@ -1,6 +1,5 @@
 package com.wcz0.asb.request.admin;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 /**

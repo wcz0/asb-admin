@@ -35,59 +35,59 @@ public class IndexController extends BaseController {
     IndexService indexService;
 
     @GetMapping("_settings")
-    public Result settings() {
+    public Result<?> settings() {
         return adminSettingService.index();
     }
 
     @PostMapping("_settings")
-    public Result saveSettings(@NotEmpty @RequestBody Map<String, String> data) {
+    public Result<?> saveSettings(@NotEmpty @RequestBody Map<String, String> data) {
         return adminSettingService.store(data);
     }
 
     @GetMapping("no-content")
-    public Result noContent() {
+    public Result<?> noContent() {
         return Result.success();
     }
 
     @GetMapping("captcha")
-    public Result captcha() {
+    public Result<?> captcha() {
         // TODO: captcha
         return Result.success();
     }
 
     @GetMapping("logout")
-    public Result logout() {
+    public Result<?> logout() {
         return Result.success();
     }
 
     @GetMapping("_download_export")
-    public Result login() {
+    public Result<?> login() {
         // TODO: download export
         return Result.success();
     }
 
     @GetMapping("current-user")
-    public Result currentUser() {
+    public Result<?> currentUser() {
         return adminUserService.currentUser();
     }
 
     @GetMapping("menus")
-    public Result menus() {
+    public Result<?> menus() {
         return adminMenuService.getMenus();
     }
 
     @PutMapping("user_setting")
-    public Result userSetting(@RequestBody UserSettingRequest request) {
+    public Result<?> userSetting(@RequestBody UserSettingRequest request) {
         return adminUserService.saveUserSetting(request);
     }
 
     @GetMapping("user_setting")
-    public Result userSetting() {
+    public Result<?> userSetting() {
         return adminUserService.getUserSetting();
     }
 
     @GetMapping("dashboard")
-    public Result dashboard() {
+    public Result<?> dashboard() {
         return indexService.dashboard();
     }
 }
